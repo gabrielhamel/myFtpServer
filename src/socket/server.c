@@ -26,7 +26,8 @@ static socket_t *socket_create(void)
     sock->fd = socket(AF_INET, SOCK_STREAM, 0);
     if (sock->fd == -1)
         return (NULL);
-    if (setsockopt(sock->fd, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(int)) == -1)
+    if (setsockopt(sock->fd, SOL_SOCKET, SO_REUSEADDR, &option,
+    sizeof(int)) == -1)
         return (NULL);
     return (sock);
 }
@@ -40,7 +41,8 @@ int socket_server_create(uint16_t port, int max_cli)
     socket->info.sin_port = htons(port);
     socket->info.sin_family = AF_INET;
     socket->info.sin_addr.s_addr = INADDR_ANY;
-    if (bind(socket->fd, (struct sockaddr *)&socket->info, sizeof(struct sockaddr_in)) == -1)
+    if (bind(socket->fd, (struct sockaddr *)&socket->info,
+    sizeof(struct sockaddr_in)) == -1)
         return (-1);
     return (listen(socket->fd, max_cli));
 }
