@@ -11,6 +11,7 @@
 #include <string.h>
 #include <signal.h>
 #include "myftp.h"
+#include "utils.h"
 
 static bool *loop(void)
 {

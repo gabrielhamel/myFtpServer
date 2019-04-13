@@ -17,5 +17,5 @@ void *init_server(const socket_t *cli)
 void end_server(const socket_t *cli, void *data)
 {
     (void)data;
-    printf("End of %d\n", cli->fd);
+    printf("End of server %d\n", cli->fd);
 }

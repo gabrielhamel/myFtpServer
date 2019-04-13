@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include "myftp.h"
+#include "utils.h"
 
 int main(int ac, char **av)
 {
