@@ -5,7 +5,8 @@
 ** list_event
 */
 
-#include <stddef.h>
+#include <stdlib.h>
+#include <string.h>
 #include "socket.h"
 
 socket_t *socket_list_get_socket(socket_list_t *list, int fd)
@@ -20,16 +21,22 @@ socket_t *socket_list_get_socket(socket_list_t *list, int fd)
     return (NULL);
 }
 
-socket_t *socket_list_get_event(socket_list_t *list)
+socket_t **socket_list_get_event(socket_list_t *list)
 {
     fd_set tmp = list->fdlist;
     struct timeval timeout = {.tv_sec = 0, .tv_usec = SERVER_REFRESH_USEC};
     int ret = select(FD_SETSIZE, &tmp, NULL, NULL, &timeout);
+    socket_t **tab = NULL;
+    size_t idx = 0;
 
     if (ret == 0 || ret == -1)
         return (NULL);
+    tab = malloc(sizeof(socket_t *) * (ret + 1));
+    if (tab == NULL)
+        return (NULL);
+    memset(tab, 0, sizeof(socket_t *) * (ret + 1));
     for (int i = 0; i < FD_SETSIZE; i++)
         if (FD_ISSET(i, &tmp))
-            return (socket_list_get_socket(list, i));
-    return (NULL);
+            tab[idx++] = socket_list_get_socket(list, i);
+    return (tab);
 }

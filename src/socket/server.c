@@ -52,8 +52,8 @@ socket_t *socket_server_create(uint16_t port, int max_cli)
 
 int socket_destroy(socket_t *server)
 {
-    if (close(server->fd) == -1)
-        return (-1);
+    shutdown(server->fd, SHUT_RDWR);
+    close(server->fd);
     free(server);
     return (0);
 }

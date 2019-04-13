@@ -44,6 +44,6 @@ int socket_list_add(socket_list_t *list, socket_t *socket);
 int socket_list_remove(socket_list_t *list, socket_t *socket);
 int socket_list_destroy(socket_list_t *list);
 socket_t *socket_list_get_socket(socket_list_t *list, int fd);
-socket_t *socket_list_get_event(socket_list_t *list);
+socket_t **socket_list_get_event(socket_list_t *list);
 
 #endif
