@@ -10,17 +10,18 @@ NAME =		myftp
 CFLAGS +=	-I$(INC_DIR) -W -Wall -Wextra
 
 SRC =		$(SRC_DIR)/main.c \
-			$(SRC_DIR)/socket/server.c \
 			$(SRC_DIR)/rigor.c \
 			$(SRC_DIR)/error.c \
-			$(SRC_DIR)/socket/list_utils.c \
-			$(SRC_DIR)/socket/list_event.c \
 			$(SRC_DIR)/ftpio.c \
 			$(SRC_DIR)/server.c \
 			$(SRC_DIR)/manage_events.c \
 			$(SRC_DIR)/client_data.c \
 			$(SRC_DIR)/server_data.c \
-			$(SRC_DIR)/linux_user.c
+			$(SRC_DIR)/linux_user.c \
+			$(SRC_DIR)/utils/ioutils.c \
+			$(SRC_DIR)/sockets/server.c \
+			$(SRC_DIR)/sockets/list_event.c \
+			$(SRC_DIR)/sockets/list_utils.c
 
 SRC_DIR =	$(realpath src)
 
