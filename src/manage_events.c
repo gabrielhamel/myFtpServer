@@ -27,10 +27,11 @@ static void client_event(socket_list_t *list, socket_t *client, char *path)
     if (buff == NULL)
         socket_list_remove(list, client);
     else {
-        printf("Client %d say: %s\n", client->fd, buff);
         toks = tokenize(buff);
-        if (toks != NULL && toks[0] != NULL)
+        if (toks != NULL && toks[0] != NULL) {
+            printf("Client %d say: %s\n", client->fd, buff);
             exec_command(client, list, toks, path);
+        }
         if (toks != NULL)
             destroy_array(toks);
         free(buff);
