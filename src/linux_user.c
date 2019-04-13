@@ -12,8 +12,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <crypt.h>
+#include "myftp.h"
 
-bool user_is_valid(char *username, char *password)
+static bool user_is_valid_linux(char *username, char *password)
 {
     struct passwd *user;
     struct spwd *pwd;
@@ -31,6 +32,15 @@ bool user_is_valid(char *username, char *password)
     if (tmp == NULL || to_cmp == NULL)
         return (false);
     if (!strcmp(tmp, to_cmp))
+        return (true);
+    return (false);
+}
+
+bool user_is_valid(char *username, char *password)
+{
+    if (!strcmp(username, DEFAULT_USER) && !strcmp("", password))
+        return (true);
+    if (user_is_valid_linux(username, password))
         return (true);
     return (false);
 }
