@@ -10,7 +10,6 @@
 
 #define EXIT_ERROR 84
 
-#define MAX_CLI 1024
 #define DEFAULT_USER "Anonymous"
 
 #include <stdbool.h>

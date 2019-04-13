@@ -38,7 +38,7 @@ void (*dtor)(const socket_t *, void *))
     return (sock);
 }
 
-socket_t *socket_server_create(uint16_t port, int max_cli,
+socket_t *socket_server_create(uint16_t port,
 void *(*ctor)(const socket_t *), void (*dtor)(const socket_t *, void *))
 {
     socket_t *socket = socket_create(ctor, dtor);
@@ -51,7 +51,7 @@ void *(*ctor)(const socket_t *), void (*dtor)(const socket_t *, void *))
     if (bind(socket->fd, (struct sockaddr *)&socket->info,
     sizeof(struct sockaddr_in)) == -1)
         return (NULL);
-    if (listen(socket->fd, max_cli) == -1)
+    if (listen(socket->fd, SOMAXCONN) == -1)
         return (NULL);
     socket->type = SERVER;
     return (socket);

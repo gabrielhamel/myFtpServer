@@ -38,7 +38,7 @@ typedef struct socket_list_t {
     socket_node_t *start;
 } socket_list_t;
 
-socket_t *socket_server_create(uint16_t port, int max_cli,
+socket_t *socket_server_create(uint16_t port,
 void *(*ctor)(const socket_t *), void (*dtor)(const socket_t *, void *));
 socket_t *socket_server_accept_cli(socket_t *server,
 void *(*ctor)(const socket_t *), void (*dtor)(const socket_t *, void *));
