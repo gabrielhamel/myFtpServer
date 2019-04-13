@@ -18,7 +18,8 @@ SRC =		$(SRC_DIR)/main.c \
 			$(SRC_DIR)/ftpio.c \
 			$(SRC_DIR)/server.c \
 			$(SRC_DIR)/manage_events.c \
-			$(SRC_DIR)/client_data.c
+			$(SRC_DIR)/client_data.c \
+			$(SRC_DIR)/server_data.c
 
 SRC_DIR =	$(realpath src)
 

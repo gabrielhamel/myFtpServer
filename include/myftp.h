@@ -27,4 +27,7 @@ void manage_event(socket_list_t *list, socket_t **evt_socks, char *path);
 void *init_client(const socket_t *cli);
 void end_client(const socket_t *cli, void *data);
 
+void *init_server(const socket_t *cli);
+void end_server(const socket_t *cli, void *data);
+
 #endif

@@ -14,10 +14,8 @@ static void server_event(socket_list_t *list, socket_t *server)
 {
     socket_t *tmp = socket_server_accept_cli(server, init_client, end_client);
 
-    if (tmp != NULL) {
+    if (tmp != NULL)
         socket_list_add(list, tmp);
-        printf("New connection %d\n", tmp->fd);
-    }
 }
 
 static void client_event(socket_list_t *list, socket_t *client, char *path)
@@ -25,10 +23,8 @@ static void client_event(socket_list_t *list, socket_t *client, char *path)
     char *buff = read_line(client);
 
     (void)path;
-    if (buff == NULL) {
-        printf("Client %d disconnected\n", client->fd);
+    if (buff == NULL)
         socket_list_remove(list, client);
-    }
     else {
         printf("Client %d say: %s\n", client->fd, buff);
         free(buff);

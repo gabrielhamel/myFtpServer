@@ -11,6 +11,7 @@
 void *init_client(const socket_t *cli)
 {
     write(cli->fd, "220 (vsFTPd 3.0.0)\r\n", 21);
+    printf("New client %d\n", cli->fd);
     return (NULL);
 }
 
@@ -18,4 +19,5 @@ void end_client(const socket_t *cli, void *data)
 {
     (void)data;
     write(cli->fd, "221 Goodbye.\r\n", 15);
+    printf("Client %d disconnected\n", cli->fd);
 }
