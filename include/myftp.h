@@ -10,7 +10,7 @@
 
 #define EXIT_ERROR 84
 
-#define MAX_CLI 10
+#define MAX_CLI 1024
 #define DEFAULT_USER "Anonymous"
 
 #include <stdbool.h>
@@ -23,5 +23,8 @@ char **tokenize(char *str);
 void destroy_array(char **tab);
 void launch_ftp(char *path, uint16_t port);
 void manage_event(socket_list_t *list, socket_t **evt_socks, char *path);
+
+void *init_client(const socket_t *cli);
+void end_client(const socket_t *cli, void *data);
 
 #endif

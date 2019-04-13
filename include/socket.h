@@ -24,8 +24,8 @@ typedef struct socket_t {
     struct sockaddr_in info;
     socket_type_t type;
     void *data;
-    void *(*constructor)(void);
-    void (*destructor)(void *);
+    void *(*ctor)(const struct socket_t *);
+    void (*dtor)(const struct socket_t *, void *);
 } socket_t;
 
 typedef struct socket_node_t {
@@ -39,9 +39,9 @@ typedef struct socket_list_t {
 } socket_list_t;
 
 socket_t *socket_server_create(uint16_t port, int max_cli,
-void *(*constructor)(void), void (*destructor)(void *));
+void *(*ctor)(const socket_t *), void (*dtor)(const socket_t *, void *));
 socket_t *socket_server_accept_cli(socket_t *server,
-void *(*constructor)(void), void (*destructor)(void *));
+void *(*ctor)(const socket_t *), void (*dtor)(const socket_t *, void *));
 int socket_destroy(socket_t *socket);
 
 socket_list_t *socket_list_create(void);

@@ -15,8 +15,8 @@
 #include <stdlib.h>
 #include "socket.h"
 
-static socket_t *socket_create(void *(*constructor)(void),
-void (*destructor)(void *))
+static socket_t *socket_create(void *(*ctor)(const socket_t *),
+void (*dtor)(const socket_t *, void *))
 {
     socket_t *sock = malloc(sizeof(socket_t));
     int option = 1;
@@ -31,17 +31,17 @@ void (*destructor)(void *))
     sizeof(int)) == -1)
         return (NULL);
     sock->file = fdopen(sock->fd, "r");
-    sock->constructor = constructor;
-    sock->destructor = destructor;
-    if (sock->constructor != NULL)
-        sock->data = sock->constructor();
+    sock->ctor = ctor;
+    sock->dtor = dtor;
+    if (sock->ctor != NULL)
+        sock->data = sock->ctor(sock);
     return (sock);
 }
 
 socket_t *socket_server_create(uint16_t port, int max_cli,
-void *(*constructor)(void), void (*destructor)(void *))
+void *(*ctor)(const socket_t *), void (*dtor)(const socket_t *, void *))
 {
-    socket_t *socket = socket_create(constructor, destructor);
+    socket_t *socket = socket_create(ctor, dtor);
 
     if (socket == NULL)
         return (NULL);
@@ -59,8 +59,8 @@ void *(*constructor)(void), void (*destructor)(void *))
 
 int socket_destroy(socket_t *socket)
 {
-    if (socket->destructor != NULL)
-        socket->destructor(socket->data);
+    if (socket->dtor != NULL)
+        socket->dtor(socket, socket->data);
     shutdown(socket->fd, SHUT_RDWR);
     fclose(socket->file);
     free(socket);
@@ -68,7 +68,7 @@ int socket_destroy(socket_t *socket)
 }
 
 socket_t *socket_server_accept_cli(socket_t *server,
-void *(*constructor)(void), void (*destructor)(void *))
+void *(*ctor)(const socket_t *), void (*dtor)(const socket_t *, void *))
 {
     socket_t *client = malloc(sizeof(socket_t));
     int fd = -1;
@@ -83,9 +83,9 @@ void *(*constructor)(void), void (*destructor)(void *))
     client->fd = fd;
     client->type = CLIENT;
     client->file = fdopen(client->fd, "r");
-    client->constructor = constructor;
-    client->destructor = destructor;
-    if (client->constructor != NULL)
-        client->data = client->constructor();
+    client->ctor = ctor;
+    client->dtor = dtor;
+    if (client->ctor != NULL)
+        client->data = client->ctor(client);
     return (client);
 }
