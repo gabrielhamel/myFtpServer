@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <string.h>
 #include "socket.h"
 
 int socket_list_add(socket_list_t *list, socket_t *socket)
@@ -85,7 +86,7 @@ socket_list_t *socket_list_create(void)
 
     if (list == NULL)
         return (NULL);
-    list->start = NULL;
+    memset(list, 0, sizeof(socket_list_t));
     FD_ZERO(&list->fdlist);
     return (list);
 }

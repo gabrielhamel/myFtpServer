@@ -12,10 +12,11 @@
 
 static void server_event(socket_list_t *list, socket_t *server)
 {
-    socket_t *tmp = socket_server_accept_cli(server);
+    socket_t *tmp = socket_server_accept_cli(server, NULL, NULL);
 
     if (tmp != NULL) {
         socket_list_add(list, tmp);
+        printf("New connection %d\n", tmp->fd);
         write(tmp->fd, "220 (vsFTPd 3.0.0)\r\n", 21);
     }
 }
@@ -29,7 +30,7 @@ static void client_event(socket_list_t *list, socket_t *client, char *path)
         socket_list_remove(list, client);
     }
     else {
-        printf("Client %d: %s\n", client->fd, buff);
+        printf("Client %d say: %s\n", client->fd, buff);
         free(buff);
     }
 }

@@ -15,7 +15,8 @@
 #include <stdlib.h>
 #include "socket.h"
 
-static socket_t *socket_create(void)
+static socket_t *socket_create(void *(*constructor)(void),
+void (*destructor)(void *))
 {
     socket_t *sock = malloc(sizeof(socket_t));
     int option = 1;
@@ -30,12 +31,17 @@ static socket_t *socket_create(void)
     sizeof(int)) == -1)
         return (NULL);
     sock->file = fdopen(sock->fd, "r");
+    sock->constructor = constructor;
+    sock->destructor = destructor;
+    if (sock->constructor != NULL)
+        sock->data = sock->constructor();
     return (sock);
 }
 
-socket_t *socket_server_create(uint16_t port, int max_cli)
+socket_t *socket_server_create(uint16_t port, int max_cli,
+void *(*constructor)(void), void (*destructor)(void *))
 {
-    socket_t *socket = socket_create();
+    socket_t *socket = socket_create(constructor, destructor);
 
     if (socket == NULL)
         return (NULL);
@@ -51,15 +57,18 @@ socket_t *socket_server_create(uint16_t port, int max_cli)
     return (socket);
 }
 
-int socket_destroy(socket_t *server)
+int socket_destroy(socket_t *socket)
 {
-    shutdown(server->fd, SHUT_RDWR);
-    fclose(server->file);
-    free(server);
+    if (socket->destructor != NULL)
+        socket->destructor(socket->data);
+    shutdown(socket->fd, SHUT_RDWR);
+    fclose(socket->file);
+    free(socket);
     return (0);
 }
 
-socket_t *socket_server_accept_cli(const socket_t *server)
+socket_t *socket_server_accept_cli(socket_t *server,
+void *(*constructor)(void), void (*destructor)(void *))
 {
     socket_t *client = malloc(sizeof(socket_t));
     int fd = -1;
@@ -74,5 +83,9 @@ socket_t *socket_server_accept_cli(const socket_t *server)
     client->fd = fd;
     client->type = CLIENT;
     client->file = fdopen(client->fd, "r");
+    client->constructor = constructor;
+    client->destructor = destructor;
+    if (client->constructor != NULL)
+        client->data = client->constructor();
     return (client);
 }

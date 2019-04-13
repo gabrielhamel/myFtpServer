@@ -24,8 +24,7 @@ socket_t *socket_list_get_socket(socket_list_t *list, int fd)
 socket_t **socket_list_get_event(socket_list_t *list)
 {
     fd_set tmp = list->fdlist;
-    struct timeval timeout = {.tv_sec = 0, .tv_usec = SERVER_REFRESH_USEC};
-    int ret = select(FD_SETSIZE, &tmp, NULL, NULL, &timeout);
+    int ret = select(FD_SETSIZE, &tmp, NULL, NULL, NULL);
     socket_t **tab = NULL;
     size_t idx = 0;
 

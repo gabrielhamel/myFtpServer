@@ -45,7 +45,7 @@ void launch_ftp(char *path, uint16_t port)
     socket_list_t *list = socket_list_create();
     socket_t *tmp;
 
-    tmp = socket_server_create(port, MAX_CLI);
+    tmp = socket_server_create(port, MAX_CLI, NULL, NULL);
     if (tmp == NULL)
         abort_prgm();
     socket_list_add(list, tmp);

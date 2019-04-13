@@ -13,8 +13,6 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#define SERVER_REFRESH_USEC 1000000
-
 typedef enum socket_type_t {
     SERVER,
     CLIENT
@@ -25,6 +23,9 @@ typedef struct socket_t {
     FILE *file;
     struct sockaddr_in info;
     socket_type_t type;
+    void *data;
+    void *(*constructor)(void);
+    void (*destructor)(void *);
 } socket_t;
 
 typedef struct socket_node_t {
@@ -37,9 +38,11 @@ typedef struct socket_list_t {
     socket_node_t *start;
 } socket_list_t;
 
-socket_t *socket_server_create(uint16_t port, int max_cli);
-socket_t *socket_server_accept_cli(const socket_t *server);
-int socket_destroy(socket_t *server);
+socket_t *socket_server_create(uint16_t port, int max_cli,
+void *(*constructor)(void), void (*destructor)(void *));
+socket_t *socket_server_accept_cli(socket_t *server,
+void *(*constructor)(void), void (*destructor)(void *));
+int socket_destroy(socket_t *socket);
 
 socket_list_t *socket_list_create(void);
 int socket_list_add(socket_list_t *list, socket_t *socket);
