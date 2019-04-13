@@ -12,7 +12,10 @@ CFLAGS +=	-I$(INC_DIR) -W -Wall -Wextra
 SRC =		$(SRC_DIR)/main.c \
 			$(SRC_DIR)/socket/server.c \
 			$(SRC_DIR)/rigor.c \
-			$(SRC_DIR)/error.c
+			$(SRC_DIR)/error.c \
+			$(SRC_DIR)/socket/list_utils.c \
+			$(SRC_DIR)/socket/list_event.c \
+			$(SRC_DIR)/get_next_line.c
 
 SRC_DIR =	$(realpath src)
 
