@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include "utils.h"
 #include "myftp.h"
 
 static void server_event(socket_list_t *list, socket_t *server)
@@ -21,12 +22,17 @@ static void server_event(socket_list_t *list, socket_t *server)
 static void client_event(socket_list_t *list, socket_t *client, char *path)
 {
     char *buff = read_line(client);
+    char **toks;
 
-    (void)path;
     if (buff == NULL)
         socket_list_remove(list, client);
     else {
         printf("Client %d say: %s\n", client->fd, buff);
+        toks = tokenize(buff);
+        if (toks != NULL && toks[0] != NULL)
+            exec_command(client, list, toks, path);
+        if (toks != NULL)
+            destroy_array(toks);
         free(buff);
     }
 }

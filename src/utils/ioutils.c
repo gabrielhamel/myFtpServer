@@ -40,3 +40,13 @@ void destroy_array(char **tab)
         free(tab[i]);
     free(tab);
 }
+
+size_t array_lenght(char **tab)
+{
+    size_t i = 0;
+
+    if (tab == NULL)
+        return (0);
+    for (; tab[i] != NULL; i++);
+    return (i);
+}

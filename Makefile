@@ -11,6 +11,7 @@ CFLAGS +=	-I$(INC_DIR) -W -Wall -Wextra
 
 SRC =		$(SRC_DIR)/main.c \
 			$(SRC_DIR)/rigor.c \
+			$(SRC_DIR)/commands.c \
 			$(SRC_DIR)/error.c \
 			$(SRC_DIR)/ftpio.c \
 			$(SRC_DIR)/server.c \
@@ -21,7 +22,8 @@ SRC =		$(SRC_DIR)/main.c \
 			$(SRC_DIR)/utils/ioutils.c \
 			$(SRC_DIR)/sockets/server.c \
 			$(SRC_DIR)/sockets/list_event.c \
-			$(SRC_DIR)/sockets/list_utils.c
+			$(SRC_DIR)/sockets/list_utils.c \
+			$(SRC_DIR)/commands/quit.c
 
 SRC_DIR =	$(realpath src)
 
