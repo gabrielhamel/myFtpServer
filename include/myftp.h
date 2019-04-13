@@ -19,5 +19,9 @@
 bool check_usage(int ac, const char **av);
 void abort_prgm(void);
 char *read_line(socket_t *socket);
+char **tokenize(char *str);
+void destroy_array(char **tab);
+void launch_ftp(char *path, uint16_t port);
+void manage_event(socket_list_t *list, socket_t **evt_socks, char *path);
 
 #endif

@@ -10,6 +10,7 @@
 
 #include <netinet/in.h>
 #include <sys/select.h>
+#include <stdio.h>
 #include <stdbool.h>
 
 #define SERVER_REFRESH_USEC 1000000
@@ -21,6 +22,7 @@ typedef enum socket_type_t {
 
 typedef struct socket_t {
     int fd;
+    FILE *file;
     struct sockaddr_in info;
     socket_type_t type;
 } socket_t;

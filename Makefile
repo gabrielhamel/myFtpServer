@@ -15,7 +15,9 @@ SRC =		$(SRC_DIR)/main.c \
 			$(SRC_DIR)/error.c \
 			$(SRC_DIR)/socket/list_utils.c \
 			$(SRC_DIR)/socket/list_event.c \
-			$(SRC_DIR)/ftpio.c
+			$(SRC_DIR)/ftpio.c \
+			$(SRC_DIR)/server.c \
+			$(SRC_DIR)/manage_events.c
 
 SRC_DIR =	$(realpath src)
 

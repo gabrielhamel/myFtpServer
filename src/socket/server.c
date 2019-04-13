@@ -29,6 +29,7 @@ static socket_t *socket_create(void)
     if (setsockopt(sock->fd, SOL_SOCKET, SO_REUSEADDR, &option,
     sizeof(int)) == -1)
         return (NULL);
+    sock->file = fdopen(sock->fd, "r");
     return (sock);
 }
 
@@ -53,7 +54,7 @@ socket_t *socket_server_create(uint16_t port, int max_cli)
 int socket_destroy(socket_t *server)
 {
     shutdown(server->fd, SHUT_RDWR);
-    close(server->fd);
+    fclose(server->file);
     free(server);
     return (0);
 }
@@ -72,5 +73,6 @@ socket_t *socket_server_accept_cli(const socket_t *server)
         return (NULL);
     client->fd = fd;
     client->type = CLIENT;
+    client->file = fdopen(client->fd, "r");
     return (client);
 }
