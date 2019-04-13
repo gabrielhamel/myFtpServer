@@ -16,6 +16,9 @@
 #include <stdbool.h>
 #include "socket.h"
 
+typedef struct ftp_cli_t {
+} ftp_cli_t;
+
 bool check_usage(int ac, const char **av);
 void abort_prgm(void);
 char *read_line(socket_t *socket);
@@ -29,5 +32,7 @@ void end_client(const socket_t *cli, void *data);
 
 void *init_server(const socket_t *cli);
 void end_server(const socket_t *cli, void *data);
+
+bool user_is_valid(char *username, char *password);
 
 #endif

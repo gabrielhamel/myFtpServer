@@ -19,7 +19,8 @@ SRC =		$(SRC_DIR)/main.c \
 			$(SRC_DIR)/server.c \
 			$(SRC_DIR)/manage_events.c \
 			$(SRC_DIR)/client_data.c \
-			$(SRC_DIR)/server_data.c
+			$(SRC_DIR)/server_data.c \
+			$(SRC_DIR)/linux_user.c
 
 SRC_DIR =	$(realpath src)
 
@@ -50,7 +51,7 @@ unit-tests:
 			@$(ECHO) $(RED)¶ Building tests$(TEAL):$(DEFAULT)
 
 $(NAME):	$(OBJ)
-			@gcc -o $(NAME) $(OBJ) && $(ECHO) $(GREEN)✓$(TEAL)" BUILD SUCCESS !"$(TEAL) $(DEFAULT) || $(ECHO) $(SANG)✗$(TEAL)" BUILD FAILED !"$(TEAL) $(DEFAULT)
+			@gcc -o $(NAME) $(OBJ) -lcrypt && $(ECHO) $(GREEN)✓$(TEAL)" BUILD SUCCESS !"$(TEAL) $(DEFAULT) || $(ECHO) $(SANG)✗$(TEAL)" BUILD FAILED !"$(TEAL) $(DEFAULT)
 
 clean:
 			@$(ECHO) $(RED)¶ Cleaning$(TEAL):$(DEFAULT)
