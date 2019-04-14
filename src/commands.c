@@ -15,7 +15,7 @@
 command_t commands_g[] = {
     {"CDUP", command_cdup},
     {"CWD", command_cwd},
-    {"DELE", NULL},
+    {"DELE", command_dele},
     {"HELP", command_help},
     {"LIST", NULL},
     {"NOOP", command_noop},

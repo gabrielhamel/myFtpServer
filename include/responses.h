@@ -19,6 +19,7 @@
 #define CODE_230 "230 Login successful.\r\n"
 #define CODE_230_ALREADY "230 Already logged in.\r\n"
 #define CODE_250 "250 Directory successfully changed.\r\n"
+#define CODE_250_DEL "250 Requested file action okay, completed.\r\n"
 #define CODE_257 "257 \"%s\"\r\n"
 #define CODE_331 "331 Please specify the password.\r\n"
 #define CODE_500 "500 Unknown command.\r\n"
@@ -30,5 +31,6 @@
 #define CODE_530_PASS "530 Login incorrect.\r\n"
 #define CODE_550 "550 Failed to change directory.\r\n"
 #define CODE_550_FILE "550 Could not get file size.\r\n"
+#define CODE_550_DELE "550 Permission denied.\r\n"
 
 #endif

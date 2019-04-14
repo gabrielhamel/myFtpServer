@@ -24,5 +24,6 @@ void command_help(socket_t *cli, socket_list_t *list, char **arg, char *path);
 void command_cdup(socket_t *cli, socket_list_t *list, char **arg, char *path);
 void command_size(socket_t *cli, socket_list_t *list, char **arg, char *path);
 void command_cwd(socket_t *cli, socket_list_t *list, char **arg, char *path);
+void command_dele(socket_t *cli, socket_list_t *list, char **arg, char *path);
 
 #endif
