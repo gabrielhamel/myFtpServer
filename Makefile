@@ -26,7 +26,9 @@ SRC =		$(SRC_DIR)/main.c \
 			$(SRC_DIR)/commands/quit.c \
 			$(SRC_DIR)/commands/user.c \
 			$(SRC_DIR)/commands/pass.c \
-			$(SRC_DIR)/commands/syst.c
+			$(SRC_DIR)/commands/syst.c \
+			$(SRC_DIR)/commands/pwd.c \
+			$(SRC_DIR)/commands/type.c
 
 SRC_DIR =	$(realpath src)
 
