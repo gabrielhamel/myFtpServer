@@ -8,6 +8,7 @@
 #ifndef RESPONSES_H
 #define RESPONSES_H
 
+#define CODE_200_NOOP "200 NOOP ok.\r\n"
 #define CODE_200_BIN "200 Switching to Binary mode.\r\n"
 #define CODE_215 "215 UNIX Type: L8\r\n"
 #define CODE_220 "220 (vsFTPd 3.0.0)\r\n"

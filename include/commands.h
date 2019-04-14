@@ -18,5 +18,6 @@ void command_pass(socket_t *cli, socket_list_t *list, char **arg, char *path);
 void command_syst(socket_t *cli, socket_list_t *list, char **arg, char *path);
 void command_pwd(socket_t *cli, socket_list_t *list, char **arg, char *path);
 void command_type(socket_t *cli, socket_list_t *list, char **arg, char *path);
+void command_noop(socket_t *cli, socket_list_t *list, char **arg, char *path);
 
 #endif

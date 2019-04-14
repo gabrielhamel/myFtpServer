@@ -26,7 +26,7 @@ command_t commands_g[] = {
     {"DELE", NULL},
     {"PWD", command_pwd},
     {"HELP", NULL},
-    {"NOOP", NULL},
+    {"NOOP", command_noop},
     {"SYST", command_syst},
     {"TYPE", command_type}
 };
