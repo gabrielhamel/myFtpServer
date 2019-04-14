@@ -28,6 +28,5 @@ void end_client(const socket_t *cli, void *data)
             free(((ftp_cli_t *)cli->data)->username);
         free(data);
     }
-    write(cli->fd, CODE_221, sizeof(CODE_221));
     printf("Client %d disconnected\n", cli->fd);
 }
