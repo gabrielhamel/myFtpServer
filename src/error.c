@@ -14,7 +14,7 @@
 
 void abort_prgm(void)
 {
-    if (!errno)
-        exit(EXIT_ERROR);
-    dprintf(STDERR_FILENO, "%s\n", strerror(errno));
+    if (errno)
+        dprintf(STDERR_FILENO, "%s\n", strerror(errno));
+    exit(EXIT_ERROR);
 }

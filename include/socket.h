@@ -20,7 +20,6 @@ typedef enum socket_type_t {
 
 typedef struct socket_t {
     int fd;
-    FILE *file;
     struct sockaddr_in info;
     socket_type_t type;
     void *data;

@@ -18,11 +18,11 @@ static void put_token(char ***tab, size_t *size, char **tok)
     }
 }
 
-char **tokenize(char *str)
+char **tokenize(char *str, char *delim)
 {
     char **tab = realloc(NULL, 2 * sizeof(char *));
     char *tmp = strdup(str);
-    char *tok = strtok(tmp, " ");
+    char *tok = strtok(tmp, delim);
     size_t size = 2;
 
     if (tok == NULL) {
@@ -33,7 +33,7 @@ char **tokenize(char *str)
     tab[0] = strdup(tok);
     tab[1] = NULL;
     while (1) {
-        tok = strtok(NULL, " ");
+        tok = strtok(NULL, delim);
         if (tok == NULL)
             break;
         put_token(&tab, &size, &tok);

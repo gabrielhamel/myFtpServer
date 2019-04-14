@@ -30,7 +30,6 @@ void (*dtor)(const socket_t *, void *))
     if (setsockopt(sock->fd, SOL_SOCKET, SO_REUSEADDR, &option,
     sizeof(int)) == -1)
         return (NULL);
-    sock->file = fdopen(sock->fd, "r");
     sock->ctor = ctor;
     sock->dtor = dtor;
     if (sock->ctor != NULL)
@@ -62,7 +61,7 @@ int socket_destroy(socket_t *socket)
     if (socket->dtor != NULL)
         socket->dtor(socket, socket->data);
     shutdown(socket->fd, SHUT_RDWR);
-    fclose(socket->file);
+    close(socket->fd);
     free(socket);
     return (0);
 }
@@ -82,7 +81,6 @@ void *(*ctor)(const socket_t *), void (*dtor)(const socket_t *, void *))
         return (NULL);
     client->fd = fd;
     client->type = CLIENT;
-    client->file = fdopen(client->fd, "r");
     client->ctor = ctor;
     client->dtor = dtor;
     if (client->ctor != NULL)

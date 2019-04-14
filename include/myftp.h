@@ -32,7 +32,7 @@ typedef struct command_t {
 extern command_t commands_g[];
 
 bool check_usage(int ac, const char **av);
-char *read_line(socket_t *socket);
+char **read_lines(socket_t *socket);
 void launch_ftp(char *path, uint16_t port);
 void manage_event(socket_list_t *list, socket_t **evt_socks, char *path);
 void *init_client(const socket_t *cli);

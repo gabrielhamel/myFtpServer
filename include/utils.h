@@ -11,11 +11,11 @@
 #include <stddef.h>
 
 #define EXIT_ERROR 84
-#define BUFF_SIZE 25
+#define READ_SIZE 4096
 
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof(*x))
 
-char **tokenize(char *str);
+char **tokenize(char *str, char *delim);
 void destroy_array(char **tab);
 size_t array_lenght(char **tab);
 void abort_prgm(void);
