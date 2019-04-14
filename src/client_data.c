@@ -15,7 +15,7 @@ void *init_client(const socket_t *cli)
 {
     ftp_cli_t *data = malloc(sizeof(ftp_cli_t));
 
-    write(cli->fd, CODE_220, sizeof(CODE_220));
+    write(cli->fd, CODE_220, sizeof(CODE_220) - 1);
     printf("New client %d\n", cli->fd);
     memset(data, 0, sizeof(ftp_cli_t));
     return (data);

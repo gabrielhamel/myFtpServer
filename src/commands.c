@@ -38,7 +38,7 @@ void exec_command(socket_t *cli, socket_list_t *list, char **arg, char *path)
         }
     }
     if (((ftp_cli_t *)cli->data)->lvl != CONNECTED)
-        write(cli->fd, CODE_530, sizeof(CODE_530));
+        write(cli->fd, CODE_530, sizeof(CODE_530) - 1);
     else
-        write(cli->fd, CODE_500, sizeof(CODE_500));
+        write(cli->fd, CODE_500, sizeof(CODE_500) - 1);
 }
