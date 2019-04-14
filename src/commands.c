@@ -13,7 +13,7 @@
 #include "commands.h"
 
 command_t commands_g[] = {
-    {"USER", NULL},
+    {"USER", command_user},
     {"PASS", NULL},
     {"CWD", NULL},
     {"CDUP", NULL},

@@ -21,6 +21,7 @@ typedef enum user_level_t {
 
 typedef struct ftp_cli_t {
     user_level_t lvl;
+    char *username;
 } ftp_cli_t;
 
 typedef struct command_t {

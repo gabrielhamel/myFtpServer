@@ -11,5 +11,6 @@
 #include "socket.h"
 
 void command_quit(socket_t *cli, socket_list_t *list, char **arg, char *path);
+void command_user(socket_t *cli, socket_list_t *list, char **arg, char *path);
 
 #endif
