@@ -11,6 +11,7 @@
 #include <stddef.h>
 
 #define EXIT_ERROR 84
+#define BUFF_SIZE 25
 
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof(*x))
 
