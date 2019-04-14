@@ -40,7 +40,7 @@ bool user_is_valid(char *username, char *password)
 {
     if (password == NULL)
         password = "";
-    if (!strcmp(username, DEFAULT_USER))
+    if (!strcasecmp(username, DEFAULT_USER))
         return (true);
     if (user_is_valid_linux(username, password))
         return (true);
