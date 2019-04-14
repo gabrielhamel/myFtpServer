@@ -8,11 +8,21 @@
 #include <stdio.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <unistd.h>
 #include <arpa/inet.h>
 #include "commands.h"
 #include "responses.h"
 #include "socket.h"
 #include "myftp.h"
+
+bool data_channel(socket_t *cli)
+{
+    if (((ftp_cli_t *)cli->data)->data_chan == NULL) {
+        write(cli->fd, CODE_425, sizeof(CODE_425) - 1);
+        return (false);
+    }
+    return (true);
+}
 
 void command_pasv(socket_t *cli, socket_list_t *list, char **arg, char *path)
 {

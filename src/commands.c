@@ -5,6 +5,7 @@
 ** commands
 */
 
+#include <sys/types.h>
 #include <string.h>
 #include <unistd.h>
 #include "myftp.h"
@@ -17,7 +18,7 @@ command_t commands_g[] = {
     {"CWD", command_cwd},
     {"DELE", command_dele},
     {"HELP", command_help},
-    {"LIST", NULL},
+    {"LIST", command_list},
     {"NOOP", command_noop},
     {"PASS", command_pass},
     {"PASV", command_pasv},
@@ -35,6 +36,11 @@ command_t commands_g[] = {
 size_t commands_lenght(void)
 {
     return (ARRAY_SIZE(commands_g));
+}
+
+pid_t duplicate(void)
+{
+    return (fork());
 }
 
 void exec_command(socket_t *cli, socket_list_t *list, char **arg, char *path)

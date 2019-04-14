@@ -23,6 +23,7 @@
 #define CODE_250_DEL "250 Requested file action okay, completed.\r\n"
 #define CODE_257 "257 \"%s\"\r\n"
 #define CODE_331 "331 Please specify the password.\r\n"
+#define CODE_425 "425 Use PORT or PASV first.\r\n"
 #define CODE_500 "500 Unknown command.\r\n"
 #define CODE_500_TYPE "500 Unrecognised TYPE command.\r\n"
 #define CODE_503 "503 Login with USER first.\r\n"
