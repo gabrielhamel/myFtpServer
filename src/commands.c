@@ -13,27 +13,32 @@
 #include "commands.h"
 
 command_t commands_g[] = {
-    {"USER", command_user},
-    {"PASS", command_pass},
-    {"CWD", NULL},
     {"CDUP", NULL},
-    {"QUIT", command_quit},
-    {"PORT", NULL},
-    {"PASV", NULL},
-    {"STOR", NULL},
-    {"RETR", NULL},
-    {"LIST", NULL},
+    {"CWD", NULL},
     {"DELE", NULL},
-    {"PWD", command_pwd},
-    {"HELP", NULL},
+    {"HELP", command_help},
+    {"LIST", NULL},
     {"NOOP", command_noop},
+    {"PASS", command_pass},
+    {"PASV", NULL},
+    {"PORT", NULL},
+    {"PWD", command_pwd},
+    {"QUIT", command_quit},
+    {"RETR", NULL},
+    {"STOR", NULL},
     {"SYST", command_syst},
-    {"TYPE", command_type}
+    {"TYPE", command_type},
+    {"USER", command_user}
 };
+
+size_t commands_lenght(void)
+{
+    return (ARRAY_SIZE(commands_g));
+}
 
 void exec_command(socket_t *cli, socket_list_t *list, char **arg, char *path)
 {
-    for (size_t i = 0; i < ARRAY_SIZE(commands_g); i++) {
+    for (size_t i = 0; i < commands_lenght(); i++) {
         if (!strcasecmp(commands_g[i].name, arg[0]) && commands_g[i].func) {
             commands_g[i].func(cli, list, arg, path);
             return;

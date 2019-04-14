@@ -11,6 +11,7 @@
 #include "socket.h"
 
 bool user_connected(socket_t *cli);
+size_t commands_lenght(void);
 
 void command_quit(socket_t *cli, socket_list_t *list, char **arg, char *path);
 void command_user(socket_t *cli, socket_list_t *list, char **arg, char *path);
@@ -19,5 +20,6 @@ void command_syst(socket_t *cli, socket_list_t *list, char **arg, char *path);
 void command_pwd(socket_t *cli, socket_list_t *list, char **arg, char *path);
 void command_type(socket_t *cli, socket_list_t *list, char **arg, char *path);
 void command_noop(socket_t *cli, socket_list_t *list, char **arg, char *path);
+void command_help(socket_t *cli, socket_list_t *list, char **arg, char *path);
 
 #endif

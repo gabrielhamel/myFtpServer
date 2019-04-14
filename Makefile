@@ -29,7 +29,8 @@ SRC =		$(SRC_DIR)/main.c \
 			$(SRC_DIR)/commands/syst.c \
 			$(SRC_DIR)/commands/pwd.c \
 			$(SRC_DIR)/commands/type.c \
-			$(SRC_DIR)/commands/noop.c
+			$(SRC_DIR)/commands/noop.c \
+			$(SRC_DIR)/commands/help.c
 
 SRC_DIR =	$(realpath src)
 
