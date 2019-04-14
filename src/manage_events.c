@@ -28,6 +28,7 @@ static void client_event(socket_list_t *list, socket_t *client, char *path)
         socket_list_remove(list, client);
     else {
         for (size_t i = 0; buff[i] != NULL; i++) {
+            printf("Recu %s\n", buff[i]);
             toks = tokenize(buff[i], " ");
             if (toks != NULL && toks[0] != NULL)
                 exec_command(client, list, toks, path);

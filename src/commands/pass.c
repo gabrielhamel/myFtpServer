@@ -16,7 +16,7 @@
 bool user_connected(socket_t *cli)
 {
     if (((ftp_cli_t *)cli->data)->lvl != CONNECTED) {
-        write(cli->fd, CODE_503, sizeof(CODE_503) - 1);
+        write(cli->fd, CODE_530, sizeof(CODE_530) - 1);
         return (false);
     }
     return (true);

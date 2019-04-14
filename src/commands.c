@@ -26,7 +26,8 @@ command_t commands_g[] = {
     {"DELE", NULL},
     {"PWD", NULL},
     {"HELP", NULL},
-    {"NOOP", NULL}
+    {"NOOP", NULL},
+    {"SYST", command_syst}
 };
 
 void exec_command(socket_t *cli, socket_list_t *list, char **arg, char *path)
