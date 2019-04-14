@@ -20,7 +20,7 @@ command_t commands_g[] = {
     {"LIST", NULL},
     {"NOOP", command_noop},
     {"PASS", command_pass},
-    {"PASV", NULL},
+    {"PASV", command_pasv},
     {"PORT", NULL},
     {"PWD", command_pwd},
     {"QUIT", command_quit},
