@@ -23,6 +23,7 @@ typedef struct ftp_cli_t {
     user_level_t lvl;
     char *username;
     char *path;
+    socket_t *data_chan;
 } ftp_cli_t;
 
 typedef struct command_t {

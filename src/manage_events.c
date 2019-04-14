@@ -19,13 +19,21 @@ static void server_event(socket_list_t *list, socket_t *server)
         socket_list_add(list, tmp);
 }
 
+static void destroy_ftp_sock(socket_list_t *list, socket_t *cli)
+{
+    if (((ftp_cli_t *)cli->data)->data_chan)
+        socket_list_remove(list, ((ftp_cli_t *)cli->data)->data_chan);
+    ((ftp_cli_t *)cli->data)->data_chan = NULL;
+    socket_list_remove(list, cli);
+}
+
 static void client_event(socket_list_t *list, socket_t *client, char *path)
 {
     char **buff = read_lines(client);
     char **toks;
 
     if (buff == NULL)
-        socket_list_remove(list, client);
+        destroy_ftp_sock(list, client);
     else {
         for (size_t i = 0; buff[i] != NULL; i++) {
             printf("Recu %s\n", buff[i]);

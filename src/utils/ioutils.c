@@ -25,13 +25,13 @@ char **tokenize(char *str, char *delim)
     char *tok = strtok(tmp, delim);
     size_t size = 2;
 
+    tab[1] = NULL;
     if (tok == NULL) {
-        free(tab);
+        tab[0] = NULL;
         free(tmp);
-        return (NULL);
+        return (tab);
     }
     tab[0] = strdup(tok);
-    tab[1] = NULL;
     while (1) {
         tok = strtok(NULL, delim);
         if (tok == NULL)

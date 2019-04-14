@@ -5,14 +5,35 @@
 ** pasv
 */
 
+#include <stdio.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 #include "commands.h"
+#include "responses.h"
 #include "socket.h"
+#include "myftp.h"
 
 void command_pasv(socket_t *cli, socket_list_t *list, char **arg, char *path)
 {
+    socket_t *tmp;
+
     (void)arg;
     (void)path;
     (void)list;
     if (!user_connected(cli))
         return;
+    if (((ftp_cli_t *)cli->data)->data_chan)
+        socket_list_remove(list, ((ftp_cli_t *)cli->data)->data_chan);
+    tmp = socket_server_create(0, NULL, NULL);
+    ((ftp_cli_t *)cli->data)->data_chan = tmp;
+    socket_list_add(list, tmp);
+    dprintf(cli->fd, CODE_227,
+    cli->info.sin_addr.s_addr & 0xff, 
+    cli->info.sin_addr.s_addr >> 8 & 0xff,
+    cli->info.sin_addr.s_addr >> 16 & 0xff,
+    cli->info.sin_addr.s_addr >> 24 & 0xff,
+    tmp->info.sin_port & 0xff, 
+    tmp->info.sin_port >> 8 & 0xff
+    );
 }

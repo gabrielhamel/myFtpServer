@@ -41,6 +41,7 @@ socket_t *socket_server_create(uint16_t port,
 void *(*ctor)(const socket_t *), void (*dtor)(const socket_t *, void *))
 {
     socket_t *socket = socket_create(ctor, dtor);
+    socklen_t len = sizeof(struct sockaddr_in);
 
     if (socket == NULL)
         return (NULL);
@@ -53,6 +54,8 @@ void *(*ctor)(const socket_t *), void (*dtor)(const socket_t *, void *))
     if (listen(socket->fd, SOMAXCONN) == -1)
         return (NULL);
     socket->type = SERVER;
+    getsockname(socket->fd, (struct sockaddr *)&socket->info,
+    &len);
     return (socket);
 }
 

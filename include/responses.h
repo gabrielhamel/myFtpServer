@@ -16,6 +16,7 @@
 #define CODE_215 "215 UNIX Type: L8\r\n"
 #define CODE_220 "220 (vsFTPd 3.0.0)\r\n"
 #define CODE_221 "221 Goodbye.\r\n"
+#define CODE_227 "227 Entering Passive Mode (%d,%d,%d,%d,%d,%d).\r\n"
 #define CODE_230 "230 Login successful.\r\n"
 #define CODE_230_ALREADY "230 Already logged in.\r\n"
 #define CODE_250 "250 Directory successfully changed.\r\n"
