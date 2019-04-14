@@ -27,5 +27,6 @@
 #define CODE_530_CHANGE "530 Can't change from guest user.\r\n"
 #define CODE_530_DENIED "530 Permission denied.\r\n"
 #define CODE_530_PASS "530 Login incorrect.\r\n"
+#define CODE_550 "550 Failed to change directory.\r\n"
 
 #endif

@@ -14,7 +14,7 @@
 
 command_t commands_g[] = {
     {"CDUP", command_cdup},
-    {"CWD", NULL},
+    {"CWD", command_cwd},
     {"DELE", NULL},
     {"HELP", command_help},
     {"LIST", NULL},
@@ -25,6 +25,7 @@ command_t commands_g[] = {
     {"PWD", command_pwd},
     {"QUIT", command_quit},
     {"RETR", NULL},
+    {"SIZE", command_size},
     {"STOR", NULL},
     {"SYST", command_syst},
     {"TYPE", command_type},

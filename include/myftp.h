@@ -42,5 +42,6 @@ void *init_server(const socket_t *cli);
 void end_server(const socket_t *cli, void *data);
 bool user_is_valid(char *username, char *password);
 void exec_command(socket_t *cli, socket_list_t *list, char **arg, char *path);
+char *change_dir(char *real_root, char *fake_root, char *path);
 
 #endif
