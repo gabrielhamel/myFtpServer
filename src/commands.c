@@ -14,7 +14,7 @@
 
 command_t commands_g[] = {
     {"USER", command_user},
-    {"PASS", NULL},
+    {"PASS", command_pass},
     {"CWD", NULL},
     {"CDUP", NULL},
     {"QUIT", command_quit},

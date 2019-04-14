@@ -38,7 +38,9 @@ static bool user_is_valid_linux(char *username, char *password)
 
 bool user_is_valid(char *username, char *password)
 {
-    if (!strcmp(username, DEFAULT_USER) && !strcmp("", password))
+    if (password == NULL)
+        password = "";
+    if (!strcmp(username, DEFAULT_USER))
         return (true);
     if (user_is_valid_linux(username, password))
         return (true);

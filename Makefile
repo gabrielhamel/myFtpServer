@@ -24,7 +24,8 @@ SRC =		$(SRC_DIR)/main.c \
 			$(SRC_DIR)/sockets/list_event.c \
 			$(SRC_DIR)/sockets/list_utils.c \
 			$(SRC_DIR)/commands/quit.c \
-			$(SRC_DIR)/commands/user.c
+			$(SRC_DIR)/commands/user.c \
+			$(SRC_DIR)/commands/pass.c
 
 SRC_DIR =	$(realpath src)
 
