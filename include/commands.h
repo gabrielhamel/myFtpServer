@@ -21,5 +21,6 @@ void command_pwd(socket_t *cli, socket_list_t *list, char **arg, char *path);
 void command_type(socket_t *cli, socket_list_t *list, char **arg, char *path);
 void command_noop(socket_t *cli, socket_list_t *list, char **arg, char *path);
 void command_help(socket_t *cli, socket_list_t *list, char **arg, char *path);
+void command_cdup(socket_t *cli, socket_list_t *list, char **arg, char *path);
 
 #endif
