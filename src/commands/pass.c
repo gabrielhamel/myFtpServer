@@ -13,6 +13,15 @@
 #include "myftp.h"
 #include "utils.h"
 
+bool user_connected(socket_t *cli)
+{
+    if (((ftp_cli_t *)cli->data)->lvl != CONNECTED) {
+        write(cli->fd, CODE_503, sizeof(CODE_503));
+        return (false);
+    }
+    return (true);
+}
+
 void command_pass(socket_t *cli, socket_list_t *list, char **arg, char *path)
 {
     (void)path;
