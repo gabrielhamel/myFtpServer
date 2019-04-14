@@ -10,6 +10,7 @@
 
 #define CODE_200_NOOP "200 NOOP ok.\r\n"
 #define CODE_200_BIN "200 Switching to Binary mode.\r\n"
+#define CODE_213 "213 %ld\r\n"
 #define CODE_214_START "214-The following commands are recognized."
 #define CODE_214_END "214 Help OK.\r\n"
 #define CODE_215 "215 UNIX Type: L8\r\n"
@@ -28,5 +29,6 @@
 #define CODE_530_DENIED "530 Permission denied.\r\n"
 #define CODE_530_PASS "530 Login incorrect.\r\n"
 #define CODE_550 "550 Failed to change directory.\r\n"
+#define CODE_550_FILE "550 Could not get file size.\r\n"
 
 #endif

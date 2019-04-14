@@ -45,3 +45,28 @@ char *change_dir(char *real_root, char *fake_root, char *path)
     free(real);
     return (new);
 }
+
+char *get_file(char *real_root, char *fake_root, char *path)
+{
+    char *real = get_path(real_root, fake_root, path);
+    char *absolute_root = realpath(real_root, NULL);
+    char *new;
+
+    if (real == NULL) {
+        free(absolute_root);
+        return (NULL);
+    }
+    if (strstr(real, absolute_root) != real) {
+        free(real);
+        free(absolute_root);
+        return (NULL);
+    }
+    new = get_new_path(real, absolute_root);
+    if (!is_file(real)) {
+        free(new);
+        free(real);
+        return (NULL);
+    }
+    free(real);
+    return (new);
+}
