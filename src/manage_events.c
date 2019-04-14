@@ -13,8 +13,12 @@
 
 static void server_event(socket_list_t *list, socket_t *server)
 {
-    socket_t *tmp = socket_server_accept_cli(server, init_client, end_client);
+    socket_t *tmp;
 
+    if (server->data)
+        tmp = socket_server_accept_cli(server, init_client, end_client);
+    else
+        tmp = socket_server_accept_cli(server, init_cli_child, end_cli_child);
     if (tmp != NULL)
         socket_list_add(list, tmp);
 }
@@ -36,7 +40,7 @@ static void client_event(socket_list_t *list, socket_t *client, char *path)
         destroy_ftp_sock(list, client);
     else {
         for (size_t i = 0; buff[i] != NULL; i++) {
-            printf("Recu %s\n", buff[i]);
+            printf("FTP main %d: %s\n", client->fd, buff[i]);
             toks = tokenize(buff[i], " ");
             if (toks != NULL && toks[0] != NULL)
                 exec_command(client, list, toks, path);
@@ -47,11 +51,26 @@ static void client_event(socket_list_t *list, socket_t *client, char *path)
     }
 }
 
+static void child_event(socket_list_t *list, socket_t *client)
+{
+    char **buff = read_lines(client);
+
+    if (buff == NULL)
+        socket_list_remove(list, client);
+    else {
+        for (size_t i = 0; buff[i] != NULL; i++)
+            printf("FTP child %d: %s\n", client->fd, buff[i]);
+        destroy_array(buff);
+    }
+}
+
 void manage_event(socket_list_t *list, socket_t **evt_socks, char *path)
 {
     for (size_t i = 0; evt_socks[i] != NULL; i++)
         if (evt_socks[i]->type == SERVER)
             server_event(list, evt_socks[i]);
-        else
+        else if (evt_socks[i]->data)
             client_event(list, evt_socks[i], path);
+        else
+            child_event(list, evt_socks[i]);
 }

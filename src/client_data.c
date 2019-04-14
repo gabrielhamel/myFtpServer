@@ -11,13 +11,25 @@
 #include "responses.h"
 #include "myftp.h"
 
+void *init_cli_child(const socket_t *cli)
+{
+    printf("FTP child: New client %d\n", cli->fd);
+    return (NULL);
+}
+
+void end_cli_child(const socket_t *cli, void *data)
+{
+    (void)data;
+    printf("FTP child: Client %d disconnected\n", cli->fd);
+}
+
 void *init_client(const socket_t *cli)
 {
     ftp_cli_t *data = malloc(sizeof(ftp_cli_t));
 
     memset(data, 0, sizeof(ftp_cli_t));
     write(cli->fd, CODE_220, sizeof(CODE_220) - 1);
-    printf("New client %d\n", cli->fd);
+    printf("FTP main: New client %d\n", cli->fd);
     data->path = strdup("/");
     return (data);
 }
@@ -30,5 +42,5 @@ void end_client(const socket_t *cli, void *data)
         free(((ftp_cli_t *)cli->data)->path);
         free(data);
     }
-    printf("Client %d disconnected\n", cli->fd);
+    printf("FTP main: Client %d disconnected\n", cli->fd);
 }

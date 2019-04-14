@@ -25,7 +25,7 @@ void command_pasv(socket_t *cli, socket_list_t *list, char **arg, char *path)
         return;
     if (((ftp_cli_t *)cli->data)->data_chan)
         socket_list_remove(list, ((ftp_cli_t *)cli->data)->data_chan);
-    tmp = socket_server_create(0, NULL, NULL);
+    tmp = socket_server_create(0, init_serv_child, end_serv_child);
     ((ftp_cli_t *)cli->data)->data_chan = tmp;
     socket_list_add(list, tmp);
     dprintf(cli->fd, CODE_227,

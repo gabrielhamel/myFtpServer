@@ -8,14 +8,26 @@
 #include <unistd.h>
 #include "myftp.h"
 
+void *init_serv_child(const socket_t *cli)
+{
+    printf("New FTP child %d\n", cli->fd);
+    return (NULL);
+}
+
+void end_serv_child(const socket_t *cli, void *data)
+{
+    (void)data;
+    printf("End of FTP child %d\n", cli->fd);
+}
+
 void *init_server(const socket_t *cli)
 {
-    printf("New server %d, ftp listening\n", cli->fd);
-    return (NULL);
+    printf("New FTP main %d\n", cli->fd);
+    return ("main");
 }
 
 void end_server(const socket_t *cli, void *data)
 {
     (void)data;
-    printf("End of server %d\n", cli->fd);
+    printf("End of FTP main %d\n", cli->fd);
 }
