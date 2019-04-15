@@ -12,6 +12,7 @@ CFLAGS +=	-I$(INC_DIR) -W -Wall -Wextra
 SRC =		$(SRC_DIR)/main.c \
 			$(SRC_DIR)/rigor.c \
 			$(SRC_DIR)/commands.c \
+			$(SRC_DIR)/accept.c \
 			$(SRC_DIR)/error.c \
 			$(SRC_DIR)/ftpio.c \
 			$(SRC_DIR)/server.c \

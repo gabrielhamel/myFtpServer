@@ -51,5 +51,6 @@ char *change_dir(char *real_root, char *fake_root, char *path);
 char *get_file(char *real_root, char *fake_root, char *path);
 void destroy_ftp_child(socket_list_t *list, socket_t *cli);
 void destroy_ftp_parent(socket_list_t *list, socket_t *cli);
+bool wait_child_client(socket_list_t *list, socket_t *serv);
 
 #endif
