@@ -45,7 +45,7 @@ static void client_event(socket_list_t *list, socket_t *client, char *path)
         for (size_t i = 0; buff[i] != NULL; i++) {
             printf("FTP main %d: %s\n", client->fd, buff[i]);
             toks = tokenize(buff[i], " ");
-            if (toks != NULL && toks[0] != NULL)
+            if (toks != NULL)
                 exec_command(client, list, toks, path);
             if (toks != NULL)
                 destroy_array(toks);

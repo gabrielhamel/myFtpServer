@@ -46,7 +46,7 @@ pid_t duplicate(void)
 
 void exec_command(socket_t *cli, socket_list_t *list, char **arg, char *path)
 {
-    for (size_t i = 0; i < commands_lenght(); i++) {
+    for (size_t i = 0; i < commands_lenght() && arg[0]; i++) {
         if (!strcasecmp(commands_g[i].name, arg[0]) && commands_g[i].func) {
             commands_g[i].func(cli, list, arg, path);
             return;
