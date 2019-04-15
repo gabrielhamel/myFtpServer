@@ -30,7 +30,6 @@ void command_pasv(socket_t *cli, socket_list_t *list, char **arg, char *path)
 
     (void)arg;
     (void)path;
-    (void)list;
     if (!user_connected(cli))
         return;
     if (((ftp_cli_t *)cli->data)->data_chan)
@@ -46,4 +45,5 @@ void command_pasv(socket_t *cli, socket_list_t *list, char **arg, char *path)
     tmp->info.sin_port & 0xff,
     tmp->info.sin_port >> 8 & 0xff
     );
+    printf("Listening on %d\n", ntohs(tmp->info.sin_port));
 }
