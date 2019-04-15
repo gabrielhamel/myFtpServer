@@ -25,7 +25,7 @@ static void write_word(int fd, size_t i)
         for (size_t j = 0; j != max_len; j++)
             write(fd, " ", 1);
     if (i == commands_lenght() - 1)
-        write(fd, "\r\n ", 2);
+        write(fd, "\r\n", 2);
 }
 
 void command_help(socket_t *cli, socket_list_t *list, char **arg, char *path)
@@ -37,8 +37,8 @@ void command_help(socket_t *cli, socket_list_t *list, char **arg, char *path)
         return;
     write(cli->fd, CODE_214_START, sizeof(CODE_214_START) - 1);
     for (size_t i = 0; i < commands_lenght(); i++) {
-        if (i % 14 == 0)
-            write(cli->fd, "\r\n ", 2);
+        if (i % 14 == 0 && i != commands_lenght() - 1)
+            write(cli->fd, "\r\n ", 3);
         write_word(cli->fd, i);
     }
     write(cli->fd, CODE_214_END, sizeof(CODE_214_END) - 1);
