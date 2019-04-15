@@ -18,6 +18,14 @@
 #include "utils.h"
 #include "myftp.h"
 
+static void print_return(socket_t *cli, int ret)
+{
+    if (ret == -1)
+        write(cli->fd, CODE_550_DELE, sizeof(CODE_550_DELE) - 1);
+    else
+        write(cli->fd, CODE_250_DEL, sizeof(CODE_250_DEL) - 1);
+}
+
 void command_dele(socket_t *cli, socket_list_t *list, char **arg, char *path)
 {
     char *tmp;
@@ -36,8 +44,7 @@ void command_dele(socket_t *cli, socket_list_t *list, char **arg, char *path)
         return;
     }
     realfile = get_path(path, ((ftp_cli_t *)cli->data)->path, arg[1]);
-    remove(realfile);
+    print_return(cli, unlink(realfile));
     free(realfile);
     free(tmp);
-    write(cli->fd, CODE_250_DEL, sizeof(CODE_250_DEL) - 1);
 }
