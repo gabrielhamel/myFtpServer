@@ -55,5 +55,7 @@ void command_list(socket_t *cli, socket_list_t *list, char **arg, char *path)
         destroy_array(arg);
         destroy_ftp_child(list, cli);
     }
+    write(cli->fd, CODE_150, sizeof(CODE_150) - 1);
+    write(cli->fd, CODE_226, sizeof(CODE_226) - 1);
     destroy_ftp_parent(list, cli);
 }

@@ -8,6 +8,7 @@
 #ifndef RESPONSES_H
 #define RESPONSES_H
 
+#define CODE_150 "150 Here comes the directory listing.\r\n"
 #define CODE_200_NOOP "200 NOOP ok.\r\n"
 #define CODE_200_BIN "200 Switching to Binary mode.\r\n"
 #define CODE_213 "213 %ld\r\n"
@@ -16,6 +17,7 @@
 #define CODE_215 "215 UNIX Type: L8\r\n"
 #define CODE_220 "220 (vsFTPd 3.0.0)\r\n"
 #define CODE_221 "221 Goodbye.\r\n"
+#define CODE_226 "226 Directory send OK.\r\n"
 #define CODE_227 "227 Entering Passive Mode (%d,%d,%d,%d,%d,%d).\r\n"
 #define CODE_230 "230 Login successful.\r\n"
 #define CODE_230_ALREADY "230 Already logged in.\r\n"
