@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <string.h>
 #include "utils.h"
 #include "myftp.h"
 
@@ -15,10 +16,12 @@ static void server_event(socket_list_t *list, socket_t *server)
 {
     socket_t *tmp;
 
-    if (server->data)
+    if (server->data && !strcmp(server->data, "main"))
         tmp = socket_server_accept_cli(server, init_client, end_client);
-    else
+    else {
         tmp = socket_server_accept_cli(server, init_cli_child, end_cli_child);
+        server->data = tmp;
+    }
     if (tmp != NULL)
         socket_list_add(list, tmp);
 }
@@ -69,8 +72,8 @@ void manage_event(socket_list_t *list, socket_t **evt_socks, char *path)
     for (size_t i = 0; evt_socks[i] != NULL; i++)
         if (evt_socks[i]->type == SERVER)
             server_event(list, evt_socks[i]);
-        else if (evt_socks[i]->data)
-            client_event(list, evt_socks[i], path);
-        else
+        else if (!strcmp("child", evt_socks[i]->data))
             child_event(list, evt_socks[i]);
+        else
+            client_event(list, evt_socks[i], path);
 }

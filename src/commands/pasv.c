@@ -21,6 +21,10 @@ bool data_channel(socket_t *cli)
         write(cli->fd, CODE_425, sizeof(CODE_425) - 1);
         return (false);
     }
+    if (((ftp_cli_t *)cli->data)->data_chan->data == NULL) {
+        write(cli->fd, CODE_425, sizeof(CODE_425) - 1);
+        return (false);
+    }
     return (true);
 }
 
@@ -43,7 +47,7 @@ void command_pasv(socket_t *cli, socket_list_t *list, char **arg, char *path)
     cli->info.sin_addr.s_addr >> 8 & 0xff,
     cli->info.sin_addr.s_addr >> 16 & 0xff,
     cli->info.sin_addr.s_addr >> 24 & 0xff,
-    tmp->info.sin_port & 0xff, 
+    tmp->info.sin_port & 0xff,
     tmp->info.sin_port >> 8 & 0xff
     );
 }

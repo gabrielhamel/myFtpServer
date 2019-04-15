@@ -6,6 +6,7 @@
 */
 
 #include <sys/types.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include "myftp.h"
@@ -55,4 +56,22 @@ void exec_command(socket_t *cli, socket_list_t *list, char **arg, char *path)
         write(cli->fd, CODE_530, sizeof(CODE_530) - 1);
     else
         write(cli->fd, CODE_500, sizeof(CODE_500) - 1);
+}
+
+void destroy_ftp_child(socket_list_t *list, socket_t *cli)
+{
+    socket_list_remove(list, ((socket_t *)(((ftp_cli_t *)cli->data)
+    ->data_chan->data)));
+    socket_list_remove(list, ((ftp_cli_t *)cli->data)->data_chan);
+    ((ftp_cli_t *)cli->data)->data_chan = NULL;
+    socket_list_destroy_no_close(list);
+    exit(0);
+}
+
+void destroy_ftp_parent(socket_list_t *list, socket_t *cli)
+{
+    socket_list_remove_no_close(list, ((socket_t *)(((ftp_cli_t *)cli->data)
+    ->data_chan->data)));
+    socket_list_remove_no_close(list, ((ftp_cli_t *)cli->data)->data_chan);
+    ((ftp_cli_t *)cli->data)->data_chan = NULL;
 }

@@ -42,7 +42,9 @@ void *(*ctor)(const socket_t *), void (*dtor)(const socket_t *, void *));
 socket_t *socket_server_accept_cli(socket_t *server,
 void *(*ctor)(const socket_t *), void (*dtor)(const socket_t *, void *));
 int socket_destroy(socket_t *socket);
-
+int socket_destroy_no_close(socket_t *socket);
+int socket_list_destroy_no_close(socket_list_t *list);
+int socket_list_remove_no_close(socket_list_t *list, socket_t *socket);
 socket_list_t *socket_list_create(void);
 int socket_list_add(socket_list_t *list, socket_t *socket);
 int socket_list_remove(socket_list_t *list, socket_t *socket);

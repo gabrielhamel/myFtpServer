@@ -14,7 +14,7 @@
 void *init_cli_child(const socket_t *cli)
 {
     printf("FTP child: New client %d\n", cli->fd);
-    return (NULL);
+    return ("child");
 }
 
 void end_cli_child(const socket_t *cli, void *data)
