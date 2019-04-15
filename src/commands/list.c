@@ -50,12 +50,17 @@ void command_list(socket_t *cli, socket_list_t *list, char **arg, char *path)
         return;
     pid = duplicate();
     if (pid == 0) {
+        if (((ftp_cli_t *)cli->data)->data_chan->data == NULL) {
+            ((ftp_cli_t *)cli->data)->data_chan->data =
+            socket_server_accept_cli (((ftp_cli_t *)cli->data)->data_chan,
+            init_cli_child, end_cli_child);
+            socket_list_add(list, ((ftp_cli_t *)cli->data)->data_chan->data);
+        }
+        write(cli->fd, CODE_150, sizeof(CODE_150) - 1);
         print_directory(path, ((ftp_cli_t *)cli->data)->path,
         ((socket_t *)(((ftp_cli_t *)cli->data)->data_chan->data))->fd);
+        write(cli->fd, CODE_226, sizeof(CODE_226) - 1);
         destroy_array(arg);
         destroy_ftp_child(list, cli);
     }
-    write(cli->fd, CODE_150, sizeof(CODE_150) - 1);
-    write(cli->fd, CODE_226, sizeof(CODE_226) - 1);
-    destroy_ftp_parent(list, cli);
 }

@@ -21,10 +21,6 @@ bool data_channel(socket_t *cli)
         write(cli->fd, CODE_425, sizeof(CODE_425) - 1);
         return (false);
     }
-    if (((ftp_cli_t *)cli->data)->data_chan->data == NULL) {
-        write(cli->fd, CODE_425, sizeof(CODE_425) - 1);
-        return (false);
-    }
     return (true);
 }
 
