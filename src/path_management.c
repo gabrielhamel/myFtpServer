@@ -73,20 +73,3 @@ char *get_file(char *real_root, char *fake_root, char *path)
     free(real);
     return (new);
 }
-
-int prepare_file(char *real_root, char *fake_root, char *path)
-{
-    char *real = get_path_file(real_root, fake_root, path);
-    char *absolute_root = realpath(real_root, NULL);
-    int tmp;
-
-    if (real == NULL || strstr(real, absolute_root) != real) {
-        if (real)
-            free(real);
-        free(absolute_root);
-        return (-1);
-    }
-    tmp = creat(real, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-    free(real);
-    return (tmp);
-}

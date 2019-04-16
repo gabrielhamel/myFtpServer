@@ -26,7 +26,7 @@ command_t commands_g[] = {
     {"PORT", NULL},
     {"PWD", command_pwd},
     {"QUIT", command_quit},
-    {"RETR", NULL},
+    {"RETR", command_retr},
     {"SIZE", command_size},
     {"STOR", command_stor},
     {"SYST", command_syst},

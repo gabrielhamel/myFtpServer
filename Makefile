@@ -42,7 +42,8 @@ SRC =		$(SRC_DIR)/main.c \
 			$(SRC_DIR)/commands/dele.c \
 			$(SRC_DIR)/commands/pasv.c \
 			$(SRC_DIR)/commands/list.c \
-			$(SRC_DIR)/commands/stor.c
+			$(SRC_DIR)/commands/stor.c \
+			$(SRC_DIR)/commands/retr.c
 
 SRC_DIR =	$(realpath src)
 

@@ -10,6 +10,7 @@
 
 #define CODE_150 "150 Here comes the directory listing.\r\n"
 #define CODE_150_UP "150 Ok to send data.\r\n"
+#define CODE_150_BIN "150 Opening BINARY mode data connection for %s (%ld bytes).\r\n"
 #define CODE_200_NOOP "200 NOOP ok.\r\n"
 #define CODE_200_BIN "200 Switching to Binary mode.\r\n"
 #define CODE_213 "213 %ld\r\n"
@@ -37,6 +38,7 @@
 #define CODE_530_PASS "530 Login incorrect.\r\n"
 #define CODE_550 "550 Failed to change directory.\r\n"
 #define CODE_550_FILE "550 Could not get file size.\r\n"
+#define CODE_550_OPEN "550 Failed to open file.\r\n"
 #define CODE_550_DELE "550 Permission denied.\r\n"
 #define CODE_553 "553 Could not create file.\r\n"
 
