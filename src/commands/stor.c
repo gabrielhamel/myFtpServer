@@ -7,6 +7,8 @@
 
 #include <stdlib.h>
 #include <sys/types.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdio.h>
@@ -20,18 +22,14 @@
 static void upload_file(int fd, socket_t *cli)
 {
     int chan = ((socket_t *)(((ftp_cli_t *)cli->data)->data_chan->data))->fd;
-    size_t n = 0;
-    char *tmp = NULL;
-    FILE *file = fdopen(chan, "r");
+    char buff[READ_SIZE] = {0};
+    ssize_t readed;
 
     write(cli->fd, CODE_150_UP, sizeof(CODE_150_UP) - 1);
-    while (getline(&tmp, &n, file) != -1) { // #FIXME
-        write(fd, tmp, n);
-        free(tmp);
-        tmp = NULL;
-    }
+    while ((readed = read(chan, buff, READ_SIZE)))
+        write(fd, buff, readed);
     write(cli->fd, CODE_226_UP, sizeof(CODE_226_UP) - 1);
-    fclose(file);
+    close(fd);
 }
 
 void command_stor(socket_t *cli, socket_list_t *list, char **arg, char *path)
