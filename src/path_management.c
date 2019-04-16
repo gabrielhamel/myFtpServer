@@ -87,7 +87,6 @@ int prepare_file(char *real_root, char *fake_root, char *path)
         return (-1);
     }
     tmp = creat(real, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-    printf("%s\n", real);
     free(real);
     return (tmp);
 }

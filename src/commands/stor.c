@@ -20,12 +20,18 @@
 static void upload_file(int fd, socket_t *cli)
 {
     int chan = ((socket_t *)(((ftp_cli_t *)cli->data)->data_chan->data))->fd;
+    size_t n = 0;
+    char *tmp = NULL;
+    FILE *file = fdopen(chan, "r");
 
     write(cli->fd, CODE_150_UP, sizeof(CODE_150_UP) - 1);
-    // DO something
-    (void)chan;
+    while (getline(&tmp, &n, file) != -1) { // #FIXME
+        write(fd, tmp, n);
+        free(tmp);
+        tmp = NULL;
+    }
     write(cli->fd, CODE_226_UP, sizeof(CODE_226_UP) - 1);
-    close(fd);
+    fclose(file);
 }
 
 void command_stor(socket_t *cli, socket_list_t *list, char **arg, char *path)
