@@ -10,6 +10,7 @@
 #include <stdbool.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <string.h>
 #include <unistd.h>
 #include "utils.h"
 
@@ -41,9 +42,13 @@ bool is_file(char *path)
 
 char *get_path(char *real_root, char *false_root, char *to_check)
 {
-    char *concat = str_add(5, real_root, "/", false_root, "/", to_check);
-    char *test = realpath(concat, NULL);
+    char *concat;
+    char *test;
 
+    if (strchr(to_check, '/') == to_check)
+        false_root = "/";
+    concat = str_add(5, real_root, "/", false_root, "/", to_check);
+    test = realpath(concat, NULL);
     free(concat);
     return (test);
 }
