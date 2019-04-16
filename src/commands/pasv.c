@@ -36,7 +36,6 @@ void command_pasv(socket_t *cli, socket_list_t *list, char **arg, char *path)
         socket_list_remove(list, ((ftp_cli_t *)cli->data)->data_chan);
     tmp = socket_server_create(0, init_serv_child, end_serv_child);
     ((ftp_cli_t *)cli->data)->data_chan = tmp;
-    socket_list_add(list, tmp);
     dprintf(cli->fd, CODE_227,
     cli->info.sin_addr.s_addr & 0xff,
     cli->info.sin_addr.s_addr >> 8 & 0xff,

@@ -18,10 +18,6 @@ static void server_event(socket_list_t *list, socket_t *server)
 
     if (server->data && !strcmp(server->data, "main"))
         tmp = socket_server_accept_cli(server, init_client, end_client);
-    else {
-        tmp = socket_server_accept_cli(server, init_cli_child, end_cli_child);
-        server->data = tmp;
-    }
     if (tmp != NULL)
         socket_list_add(list, tmp);
 }
