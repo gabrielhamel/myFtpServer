@@ -23,6 +23,7 @@ size_t array_lenght(char **tab);
 void abort_prgm(void);
 char *str_add(int nb, ...);
 char *get_path(char *real_root, char *false_root, char *to_check);
+char *get_path_file(char *real_root, char *false_root, char *to_check);
 bool is_directory(char *path);
 bool is_file(char *path);
 

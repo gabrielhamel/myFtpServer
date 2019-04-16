@@ -28,7 +28,7 @@ command_t commands_g[] = {
     {"QUIT", command_quit},
     {"RETR", NULL},
     {"SIZE", command_size},
-    {"STOR", NULL},
+    {"STOR", command_stor},
     {"SYST", command_syst},
     {"TYPE", command_type},
     {"USER", command_user}
