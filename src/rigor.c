@@ -14,6 +14,15 @@
 #include <ctype.h>
 #include "myftp.h"
 
+static void check_sudo(void)
+{
+    int id = getuid();
+
+    if (id != 0)
+        printf("Warning you doesn't run with root user. " \
+        "Cannot check linux users.\n");
+}
+
 static size_t get_short_len(void)
 {
     size_t len = 1;
@@ -65,6 +74,7 @@ bool check_usage(int ac, const char **av)
             dprintf(STDERR_FILENO, "Cannot access at %s\n", av[2]);
             return (false);
         }
+        check_sudo();
         return (true);
     }
     printf("USAGE:\t%s port path\n\t" \

@@ -13,27 +13,45 @@
 #include <string.h>
 #include <crypt.h>
 #include "myftp.h"
+#include "utils.h"
+
+static bool compare(char *password, char *to_cmp)
+{
+    char *tmp;
+
+    if (to_cmp == NULL)
+        return (false);
+    tmp = crypt(password, to_cmp);
+    if (tmp == NULL)
+        return (false);
+    if (!strcmp(tmp, to_cmp)) {
+        free(tmp);
+        return (true);
+    }
+    free(tmp);
+    return (false);
+}
 
 static bool user_is_valid_linux(char *username, char *password)
 {
-    struct passwd *user;
-    struct spwd *pwd;
+    struct passwd user = {0};
+    struct spwd pwd = {0};
     char *to_cmp;
-    char *tmp;
+    void *lambda = NULL;
+    int ret;
+    char user_buff[READ_SIZE] = {0};
+    char pwd_buff[READ_SIZE] = {0};
 
-    user = getpwnam(username);
+    ret = getpwnam_r(username, &user, user_buff, READ_SIZE,
+    (struct passwd **)&lambda);
     endpwent();
-    if (user == NULL)
+    if (ret != 0)
         return (false);
-    pwd = getspnam(user->pw_name);
+    ret = getspnam_r(user.pw_name, &pwd, pwd_buff, READ_SIZE,
+    (struct spwd **)&lambda);
     endspent();
-    to_cmp = pwd ? pwd->sp_pwdp : user->pw_passwd;
-    tmp = crypt(password, to_cmp);
-    if (tmp == NULL || to_cmp == NULL)
-        return (false);
-    if (!strcmp(tmp, to_cmp))
-        return (true);
-    return (false);
+    to_cmp = !ret ? pwd.sp_pwdp : user.pw_passwd;
+    return (compare(password, to_cmp));
 }
 
 bool user_is_valid(char *username, char *password)
