@@ -10,7 +10,8 @@
 
 #define CODE_150 "150 Here comes the directory listing.\r\n"
 #define CODE_150_UP "150 Ok to send data.\r\n"
-#define CODE_150_BIN "150 Opening BINARY mode data connection for %s (%ld bytes).\r\n"
+#define CODE_150_BIN "150 Opening BINARY mode data" \
+" connection for %s (%ld bytes).\r\n"
 #define CODE_200_NOOP "200 NOOP ok.\r\n"
 #define CODE_200_BIN "200 Switching to Binary mode.\r\n"
 #define CODE_213 "213 %ld\r\n"
