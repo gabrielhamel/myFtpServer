@@ -17,20 +17,30 @@
 #include "socket.h"
 #include "myftp.h"
 
-static void print_directory(char *rroot, char *froot, int fd)
+static FILE *prepare_file(char *path)
 {
-    char *path = get_path(rroot, froot, "");
+    char *str = str_add(2, "ls -l ", path);
     FILE *file;
     size_t n = 0;
-    char *tmp;
-    char *str = str_add(2, "ls -l ", path);
 
     free(path);
     file = popen(str, "r");
     free(str);
+    str = NULL;
     getline(&str, &n, file);
     free(str);
-    str = NULL;
+    return (file);
+}
+
+static void print_directory(char *rroot, char *froot, int fd)
+{
+    char *path = get_path(rroot, froot, "");
+    FILE *file;
+    char *str = NULL;
+    size_t n = 0;
+    char *tmp;
+
+    file = prepare_file(path);
     while (getline(&str, &n, file) != -1) {
         str[strlen(str) - 1] = '\0';
         tmp = str_add(2, str, "\r\n");
@@ -40,6 +50,8 @@ static void print_directory(char *rroot, char *froot, int fd)
         str = NULL;
     }
     pclose(file);
+    if (str)
+        free(str);
 }
 
 void destroy_channel(socket_t *cli)

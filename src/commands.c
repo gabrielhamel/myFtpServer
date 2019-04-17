@@ -68,6 +68,7 @@ void destroy_ftp_child(socket_list_t *list, socket_t *cli, char **arg)
         socket_list_remove(list, ((ftp_cli_t *)cli->data)->data_chan);
     }
     ((ftp_cli_t *)cli->data)->data_chan = NULL;
+    free(list->tab);
     socket_list_destroy_no_close(list);
     destroy_array(arg);
     exit(0);

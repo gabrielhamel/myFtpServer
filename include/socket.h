@@ -35,6 +35,7 @@ typedef struct socket_node_t {
 typedef struct socket_list_t {
     fd_set fdlist;
     socket_node_t *start;
+    socket_t **tab;
 } socket_list_t;
 
 socket_t *socket_server_create(uint16_t port,

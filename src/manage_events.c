@@ -34,17 +34,19 @@ static void client_event(socket_list_t *list, socket_t *client, char *path)
 {
     char *buff = read_line(client);
     char **toks;
+    size_t len;
 
     if (buff == NULL)
         destroy_ftp_sock(list, client);
     else {
         printf("FTP main %d: %s\n", client->fd, buff);
         toks = tokenize(buff, " ");
-        if (toks != NULL && strlen(buff))
+        len = strlen(buff);
+        free(buff);
+        if (toks != NULL && len)
             exec_command(client, list, toks, path);
         if (toks != NULL)
             destroy_array(toks);
-        free(buff);
     }
 }
 

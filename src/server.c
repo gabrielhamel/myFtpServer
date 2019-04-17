@@ -34,6 +34,7 @@ static void ftp_loop(socket_list_t *list, char *path)
 
     while (*loop()) {
         tab = socket_list_get_event(list);
+        list->tab = tab;
         if (tab == NULL)
             continue;
         manage_event(list, tab, path);
@@ -46,6 +47,7 @@ void launch_ftp(char *path, uint16_t port)
     socket_list_t *list = socket_list_create();
     socket_t *tmp;
 
+    list->tab = NULL;
     tmp = socket_server_create(port, init_server, end_server);
     if (tmp == NULL)
         abort_prgm();
