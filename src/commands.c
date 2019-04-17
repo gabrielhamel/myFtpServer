@@ -62,9 +62,11 @@ void destroy_ftp_child(socket_list_t *list, socket_t *cli, char **arg)
 {
     if (((ftp_cli_t *)cli->data)->mode == ACTIVE)
         socket_destroy(((ftp_cli_t *)cli->data)->data_chan);
-    socket_list_remove(list, ((socket_t *)(((ftp_cli_t *)cli->data)
-    ->data_chan->data)));
-    socket_list_remove(list, ((ftp_cli_t *)cli->data)->data_chan);
+    else {
+        socket_list_remove(list, ((socket_t *)(((ftp_cli_t *)cli->data)
+        ->data_chan->data)));
+        socket_list_remove(list, ((ftp_cli_t *)cli->data)->data_chan);
+    }
     ((ftp_cli_t *)cli->data)->data_chan = NULL;
     socket_list_destroy_no_close(list);
     destroy_array(arg);
