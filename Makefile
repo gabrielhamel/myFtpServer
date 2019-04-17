@@ -18,6 +18,7 @@ SRC =		$(SRC_DIR)/main.c \
 			$(SRC_DIR)/server.c \
 			$(SRC_DIR)/manage_events.c \
 			$(SRC_DIR)/client_data.c \
+			$(SRC_DIR)/socket_client.c \
 			$(SRC_DIR)/server_data.c \
 			$(SRC_DIR)/linux_user.c \
 			$(SRC_DIR)/path_management.c \
@@ -25,6 +26,7 @@ SRC =		$(SRC_DIR)/main.c \
 			$(SRC_DIR)/utils/strings.c \
 			$(SRC_DIR)/utils/path.c \
 			$(SRC_DIR)/sockets/server.c \
+			$(SRC_DIR)/sockets/client.c \
 			$(SRC_DIR)/sockets/list_event.c \
 			$(SRC_DIR)/sockets/list_utils.c \
 			$(SRC_DIR)/sockets/list_close.c \
@@ -43,7 +45,8 @@ SRC =		$(SRC_DIR)/main.c \
 			$(SRC_DIR)/commands/pasv.c \
 			$(SRC_DIR)/commands/list.c \
 			$(SRC_DIR)/commands/stor.c \
-			$(SRC_DIR)/commands/retr.c
+			$(SRC_DIR)/commands/retr.c \
+			$(SRC_DIR)/commands/port.c
 
 SRC_DIR =	$(realpath src)
 

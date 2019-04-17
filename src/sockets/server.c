@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include "socket.h"
 
-static socket_t *socket_create(void *(*ctor)(const socket_t *),
+socket_t *socket_create(void *(*ctor)(const socket_t *),
 void (*dtor)(const socket_t *, void *))
 {
     socket_t *sock = malloc(sizeof(socket_t));

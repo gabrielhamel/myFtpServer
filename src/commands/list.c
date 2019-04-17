@@ -42,6 +42,14 @@ static void print_directory(char *rroot, char *froot, int fd)
     pclose(file);
 }
 
+void destroy_channel(socket_t *cli)
+{
+    if (((ftp_cli_t *)cli->data)->mode == ACTIVE) {
+        socket_destroy_no_close(((ftp_cli_t *)cli->data)->data_chan);
+        ((ftp_cli_t *)cli->data)->data_chan = NULL;
+    }
+}
+
 void command_list(socket_t *cli, socket_list_t *list, char **arg, char *path)
 {
     pid_t pid;
@@ -62,4 +70,5 @@ void command_list(socket_t *cli, socket_list_t *list, char **arg, char *path)
         destroy_array(arg);
         destroy_ftp_child(list, cli);
     }
+    destroy_channel(cli);
 }

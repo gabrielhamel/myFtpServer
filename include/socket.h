@@ -41,6 +41,11 @@ socket_t *socket_server_create(uint16_t port,
 void *(*ctor)(const socket_t *), void (*dtor)(const socket_t *, void *));
 socket_t *socket_server_accept_cli(socket_t *server,
 void *(*ctor)(const socket_t *), void (*dtor)(const socket_t *, void *));
+socket_t *socket_client_create(uint16_t port, uint32_t ipaddr,
+void *(*ctor)(const socket_t *), void (*dtor)(const socket_t *, void *));
+socket_t *socket_create(void *(*ctor)(const socket_t *),
+void (*dtor)(const socket_t *, void *));
+uint32_t convert_ip(char *ip);
 int socket_destroy(socket_t *socket);
 int socket_destroy_no_close(socket_t *socket);
 int socket_list_destroy_no_close(socket_list_t *list);

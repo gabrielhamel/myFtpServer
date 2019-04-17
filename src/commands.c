@@ -23,7 +23,7 @@ command_t commands_g[] = {
     {"NOOP", command_noop},
     {"PASS", command_pass},
     {"PASV", command_pasv},
-    {"PORT", NULL},
+    {"PORT", command_port},
     {"PWD", command_pwd},
     {"QUIT", command_quit},
     {"RETR", command_retr},
@@ -60,6 +60,8 @@ void exec_command(socket_t *cli, socket_list_t *list, char **arg, char *path)
 
 void destroy_ftp_child(socket_list_t *list, socket_t *cli)
 {
+    if (((ftp_cli_t *)cli->data)->mode == ACTIVE)
+        socket_destroy(((ftp_cli_t *)cli->data)->data_chan);
     socket_list_remove(list, ((socket_t *)(((ftp_cli_t *)cli->data)
     ->data_chan->data)));
     socket_list_remove(list, ((ftp_cli_t *)cli->data)->data_chan);
@@ -70,6 +72,11 @@ void destroy_ftp_child(socket_list_t *list, socket_t *cli)
 
 void destroy_ftp_parent(socket_list_t *list, socket_t *cli)
 {
+    if (((ftp_cli_t *)cli->data)->mode == ACTIVE) {
+        socket_destroy_no_close(((ftp_cli_t *)cli->data)->data_chan);
+        ((ftp_cli_t *)cli->data)->data_chan = NULL;
+        return;
+    }
     socket_list_remove_no_close(list, ((socket_t *)(((ftp_cli_t *)cli->data)
     ->data_chan->data)));
     socket_list_remove_no_close(list, ((ftp_cli_t *)cli->data)->data_chan);

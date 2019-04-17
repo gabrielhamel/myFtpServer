@@ -73,4 +73,5 @@ void command_stor(socket_t *cli, socket_list_t *list, char **arg, char *path)
         destroy_array(arg);
         destroy_ftp_child(list, cli);
     }
+    destroy_channel(cli);
 }

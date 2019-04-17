@@ -31,5 +31,6 @@ void command_pasv(socket_t *cli, socket_list_t *list, char **arg, char *path);
 void command_list(socket_t *cli, socket_list_t *list, char **arg, char *path);
 void command_stor(socket_t *cli, socket_list_t *list, char **arg, char *path);
 void command_retr(socket_t *cli, socket_list_t *list, char **arg, char *path);
+void command_port(socket_t *cli, socket_list_t *list, char **arg, char *path);
 
 #endif

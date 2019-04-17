@@ -19,11 +19,17 @@ typedef enum user_level_t {
     CONNECTED
 } user_level_t;
 
+typedef enum user_mod_t {
+    PASSIVE,
+    ACTIVE
+} user_mod_t;
+
 typedef struct ftp_cli_t {
     user_level_t lvl;
     char *username;
     char *path;
     socket_t *data_chan;
+    user_mod_t mode;
 } ftp_cli_t;
 
 typedef struct command_t {
@@ -52,5 +58,8 @@ char *get_file(char *real_root, char *fake_root, char *path);
 void destroy_ftp_child(socket_list_t *list, socket_t *cli);
 void destroy_ftp_parent(socket_list_t *list, socket_t *cli);
 bool wait_child_client(socket_list_t *list, socket_t *serv);
+void *init_ftp_cli_child(const socket_t *cli);
+void end_ftp_cli_child(const socket_t *cli, void *data);
+void destroy_channel(socket_t *cli);
 
 #endif
