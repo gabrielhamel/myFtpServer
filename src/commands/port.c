@@ -32,7 +32,7 @@ static int regex_test(char *str)
 }
 
 static bool command_valid(char **arg, socket_t *cli)
-{    
+{
     if (array_lenght(arg) < 2 || regex_test(arg[1])) {
         write(cli->fd, CODE_500_PORT, sizeof(CODE_500_PORT) - 1);
         return (false);

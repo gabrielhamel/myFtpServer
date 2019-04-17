@@ -60,15 +60,13 @@ void command_list(socket_t *cli, socket_list_t *list, char **arg, char *path)
     if (pid == 0) {
         if (!wait_child_client(list, cli)) {
             write(cli->fd, CODE_425, sizeof(CODE_425) - 1);
-            destroy_array(arg);
-            destroy_ftp_child(list, cli);
+            destroy_ftp_child(list, cli, arg);
         }
         write(cli->fd, CODE_150, sizeof(CODE_150) - 1);
         print_directory(path, ((ftp_cli_t *)cli->data)->path,
         ((socket_t *)(((ftp_cli_t *)cli->data)->data_chan->data))->fd);
         write(cli->fd, CODE_226, sizeof(CODE_226) - 1);
-        destroy_array(arg);
-        destroy_ftp_child(list, cli);
+        destroy_ftp_child(list, cli, arg);
     }
     destroy_channel(cli);
 }

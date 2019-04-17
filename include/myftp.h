@@ -55,7 +55,7 @@ bool user_is_valid(char *username, char *password);
 void exec_command(socket_t *cli, socket_list_t *list, char **arg, char *path);
 char *change_dir(char *real_root, char *fake_root, char *path);
 char *get_file(char *real_root, char *fake_root, char *path);
-void destroy_ftp_child(socket_list_t *list, socket_t *cli);
+void destroy_ftp_child(socket_list_t *list, socket_t *cli, char **arg);
 void destroy_ftp_parent(socket_list_t *list, socket_t *cli);
 bool wait_child_client(socket_list_t *list, socket_t *serv);
 void *init_ftp_cli_child(const socket_t *cli);

@@ -63,12 +63,10 @@ void command_retr(socket_t *cli, socket_list_t *list, char **arg, char *path)
     if (pid == 0) {
         if (!wait_child_client(list, cli)) {
             write(cli->fd, CODE_425, sizeof(CODE_425) - 1);
-            destroy_array(arg);
-            destroy_ftp_child(list, cli);
+            destroy_ftp_child(list, cli, arg);
         }
         download_file(fd, cli, arg[1]);
-        destroy_array(arg);
-        destroy_ftp_child(list, cli);
+        destroy_ftp_child(list, cli, arg);
     }
     destroy_channel(cli);
 }

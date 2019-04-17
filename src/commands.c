@@ -58,7 +58,7 @@ void exec_command(socket_t *cli, socket_list_t *list, char **arg, char *path)
         write(cli->fd, CODE_500, sizeof(CODE_500) - 1);
 }
 
-void destroy_ftp_child(socket_list_t *list, socket_t *cli)
+void destroy_ftp_child(socket_list_t *list, socket_t *cli, char **arg)
 {
     if (((ftp_cli_t *)cli->data)->mode == ACTIVE)
         socket_destroy(((ftp_cli_t *)cli->data)->data_chan);
@@ -67,6 +67,7 @@ void destroy_ftp_child(socket_list_t *list, socket_t *cli)
     socket_list_remove(list, ((ftp_cli_t *)cli->data)->data_chan);
     ((ftp_cli_t *)cli->data)->data_chan = NULL;
     socket_list_destroy_no_close(list);
+    destroy_array(arg);
     exit(0);
 }
 
