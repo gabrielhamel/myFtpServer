@@ -14,6 +14,7 @@
 " connection for %s (%ld bytes).\r\n"
 #define CODE_200_NOOP "200 NOOP ok.\r\n"
 #define CODE_200_BIN "200 Switching to Binary mode.\r\n"
+#define CODE_200_ASC "200 Switching to ASCII mode.\r\n"
 #define CODE_200_PORT "200 PORT command successful. Consider using PASV.\r\n"
 #define CODE_213 "213 %ld\r\n"
 #define CODE_214_START "214-The following commands are recognized."
