@@ -31,12 +31,14 @@ void *init_client(const socket_t *cli)
     write(cli->fd, CODE_220, sizeof(CODE_220) - 1);
     printf("FTP main: New client %d\n", cli->fd);
     data->path = strdup("/");
+    data->buff = strdup("");
     return (data);
 }
 
 void end_client(const socket_t *cli, void *data)
 {
     if (data != NULL) {
+        free(((ftp_cli_t *)cli->data)->buff);
         if (((ftp_cli_t *)cli->data)->username)
             free(((ftp_cli_t *)cli->data)->username);
         free(((ftp_cli_t *)cli->data)->path);
