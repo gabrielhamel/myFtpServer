@@ -28,6 +28,7 @@ command_t commands_g[] = {
     {"PWD", command_pwd},
     {"QUIT", command_quit},
     {"RETR", command_retr},
+    {"RMD", command_rmd},
     {"SIZE", command_size},
     {"STOR", command_stor},
     {"SYST", command_syst},
