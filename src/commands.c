@@ -20,6 +20,7 @@ command_t commands_g[] = {
     {"DELE", command_dele},
     {"HELP", command_help},
     {"LIST", command_list},
+    {"MKD", command_mkd},
     {"NOOP", command_noop},
     {"PASS", command_pass},
     {"PASV", command_pasv},

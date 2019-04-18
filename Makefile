@@ -46,7 +46,8 @@ SRC =		$(SRC_DIR)/main.c \
 			$(SRC_DIR)/commands/list.c \
 			$(SRC_DIR)/commands/stor.c \
 			$(SRC_DIR)/commands/retr.c \
-			$(SRC_DIR)/commands/port.c
+			$(SRC_DIR)/commands/port.c \
+			$(SRC_DIR)/commands/mkd.c
 
 SRC_DIR =	$(realpath src)
 
