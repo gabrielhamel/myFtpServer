@@ -28,7 +28,6 @@ static void print_return(socket_t *cli, int ret)
 
 void command_rmd(socket_t *cli, socket_list_t *list, char **arg, char *path)
 {
-    char *tmp;
     char *realfile;
 
     (void)list;
@@ -38,13 +37,7 @@ void command_rmd(socket_t *cli, socket_list_t *list, char **arg, char *path)
         write(cli->fd, CODE_550_RMD, sizeof(CODE_550_RMD) - 1);
         return;
     }
-    tmp = get_file(path, ((ftp_cli_t *)cli->data)->path, arg[1]);
-    if (tmp == NULL) {
-        write(cli->fd, CODE_550_RMD, sizeof(CODE_550_RMD) - 1);
-        return;
-    }
     realfile = get_path(path, ((ftp_cli_t *)cli->data)->path, arg[1]);
     print_return(cli, rmdir(realfile));
     free(realfile);
-    free(tmp);
 }

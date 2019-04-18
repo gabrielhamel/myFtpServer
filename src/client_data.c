@@ -39,6 +39,8 @@ void end_client(const socket_t *cli, void *data)
 {
     if (data != NULL) {
         free(((ftp_cli_t *)cli->data)->buff);
+        if (((ftp_cli_t *)cli->data)->data_chan)
+            socket_destroy_no_close(((ftp_cli_t *)cli->data)->data_chan);
         if (((ftp_cli_t *)cli->data)->username)
             free(((ftp_cli_t *)cli->data)->username);
         free(((ftp_cli_t *)cli->data)->path);
