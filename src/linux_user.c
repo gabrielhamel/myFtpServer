@@ -24,11 +24,8 @@ static bool compare(char *password, char *to_cmp)
     tmp = crypt(password, to_cmp);
     if (tmp == NULL)
         return (false);
-    if (!strcmp(tmp, to_cmp)) {
-        free(tmp);
+    if (!strcmp(tmp, to_cmp))
         return (true);
-    }
-    free(tmp);
     return (false);
 }
 
